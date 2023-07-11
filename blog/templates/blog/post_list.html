@@ -1,5 +1,5 @@
 {% extends 'blog/base.html' %}
-
+{% load filters %}
 {% block content %}
     {% for post in posts %}
         <div class="post">
@@ -7,7 +7,7 @@
                 {{ post.published_date }}
             </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaksbr }}</p>
+            <p>{{ post.text|linebreaksbr|number_to_text }}</p>
         </div>
     {% endfor %}
 {% endblock %}
