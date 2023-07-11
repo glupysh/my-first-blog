@@ -7,6 +7,18 @@ body {
     padding-left: 15px;
 }
 
+table {
+    border: 4px double #008080; /* Рамка вокруг таблицы */
+    border-collapse: collapse; /* Способ отображения границы */
+    width: 100%; /* Ширина таблицы */
+    border-spacing: 7px 11px; /* Расстояние между ячейками */
+}
+
+th, td {
+    padding: 5px; /* Поля вокруг текста */
+    border: 1px solid #008080; /* Граница вокруг ячеек */
+}
+
 .page-header {
     background-color: #ff9400;
     margin-top: 0;
@@ -53,3 +65,4 @@ h1, h2, h3, h4 {
 .post h1 a, .post h1 a:visited {
     color: #000000;
 }
+

@@ -3,6 +3,8 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
+
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
@@ -41,3 +43,14 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+def statistics(request):
+    author_dict = {}
+    authors = User.objects.all()
+    for i in authors:
+        cnt = Post.objects.filter(author=i).count()
+        lst = Post.objects.filter(author=i, published_date__lte=timezone.now()).order_by('published_date').last()
+        author_dict[i] = (cnt, lst)
+    context = {'author_dict': author_dict}
+    return render(request, 'blog/statistics.html', context)

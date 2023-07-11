@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <table>
+        <tr>
+        <th>Автор</th>
+        <th>Число постов</th>
+        <th>Дата публикации последнего поста</th>
+        </tr>
+            {% for key, value in author_dict.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value.0 }}</td>
+                    <td>{{ value.1.published_date }}</td>
+                </tr>
+            {% endfor %}
+    </table>
+{% endblock %}
