@@ -1,13 +1,13 @@
 {% extends 'blog/base.html' %}
 {% load filters %}
 {% block content %}
-    {% for post in posts %}
+    {% for post in post_list %}
         <div class="post">
             <div class="date">
                 {{ post.published_date }}
             </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaksbr|number_to_text }}</p>
+            <p>{{ post.text|linebreaksbr|number_to_text|red2|safe }}</p>
             <p>Автор: {{ post.author }}</p>
         </div>
     {% endfor %}
