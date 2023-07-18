@@ -1,12 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, TemplateView
 from .models import Post
 from .forms import PostForm
-
+from django.db.models import Count, Max
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.db.models import Count
 
 
 class PostListView(ListView):
@@ -49,13 +48,13 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-def statistics(request):
-    author_dict = {}
-    authors = User.objects.all()
-    for i in authors:
-        cnt = Post.objects.filter(author=i).count()
-        lst = Post.objects.filter(author=i, published_date__lte=timezone.now()).order_by('published_date').last()
-        author_dict[i] = (cnt, lst)
-    context = {'author_dict': author_dict}
-    return render(request, 'blog/statistics.html', context)
+class StatisticsView(TemplateView):
+    template_name = "blog/statistics.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        authors = Post.objects.values('author__username').annotate(cnt=Count('author__username'), lst=Max('published_date'))
+        context['authors'] = authors
+        return context
+
 

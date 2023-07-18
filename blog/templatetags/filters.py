@@ -14,15 +14,13 @@ def number_to_text(value):
 @register.filter
 def red2(value):
     cnt = 0
-    while '<br>' in value:
+    while '<p>' in value:
         cnt += 1
-        if cnt == 1:
-            value = value.replace('<br>', '<p style="color:#FF0000">', 1)
-        elif cnt % 2 == 0:
-            value = value.replace('<br>', '</p><p style="color:#000000">', 1)
-        elif cnt % 2 != 0:
-            value = value.replace('<br>', '</p><p style="color:#FF0000">', 1)
-    return value+'</p>'
+        if cnt % 2 != 0:
+            value = value.replace('<p>', '<p style="color:#000000">', 1)
+        if cnt % 2 == 0:
+            value = value.replace('<p>', '<p style="color:#FF0000">', 1)
+    return value
 
 
 

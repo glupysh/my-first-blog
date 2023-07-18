@@ -12,7 +12,7 @@
             <a class="btn btn-default" href="{% url 'post_update' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         {% endif %}
         <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr|number_to_text|safe }}</p>
+        <p>{{ post.text|red2|safe }}</p>
         {% thumbnail post.image "800x600" as im %}
             <img src="{{ im.url }}">
         {% endthumbnail %}

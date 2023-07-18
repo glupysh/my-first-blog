@@ -6,11 +6,11 @@
         <th>Число постов</th>
         <th>Дата публикации последнего поста</th>
         </tr>
-            {% for key, value in author_dict.items %}
+            {% for i in authors %}
                 <tr>
-                    <td>{{ key }}</td>
-                    <td>{{ value.0 }}</td>
-                    <td>{{ value.1.published_date }}</td>
+                    <td>{{ i.author__username }}</td>
+                    <td>{{ i.cnt }}</td>
+                    <td>{{ i.lst }}</td>
                 </tr>
             {% endfor %}
     </table>

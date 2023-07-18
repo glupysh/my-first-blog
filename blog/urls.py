@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, statistics
+from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, StatisticsView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -8,7 +8,7 @@ urlpatterns = [
     path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('post/new/', PostCreateView.as_view(), name='post_create'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post_update'),
-    path('statistics/', statistics, name='statistics'),
+    path('statistics/', StatisticsView.as_view(), name='statistics'),
 ]
 
 if settings.DEBUG:
