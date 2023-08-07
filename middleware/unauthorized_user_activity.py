@@ -12,7 +12,7 @@ class UnauthorizedUserActivityMiddleware:
 
     def __call__(self, request):
         response = self.get_response(request)
-        if settings.UNAUTHORIZED_USER_ACTIVITY is True and request.user.is_authenticated is False:
+        if settings.UNAUTHORIZED_USER_ACTIVITY and not request.user.is_authenticated:
             user_ip = self.get_client_ip(request)
             url = request.build_absolute_uri()
             self.logger.info(f"Unauthorized user IP: {user_ip} URL: {url} Type: {request.method}")
